@@ -48,9 +48,7 @@ class CategoryServiceTest {
 
     @Test
     void givenValidCreateCategoryInput_whenCreateNewCategory_thenCallSaveRepoLayerOnce() {
-        CreateCategoryDto createBookDto = new CreateCategoryDto();
-        createBookDto.setCategoryName("Book");
-        createBookDto.setDescription("Book");
+        CreateCategoryDto createBookDto = CreateCategoryDto.builder().categoryName("Book").description("Book").build();
 
         Category book = new Category();
         book.setCategoryName("Book");

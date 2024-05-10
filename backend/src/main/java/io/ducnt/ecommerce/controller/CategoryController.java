@@ -27,7 +27,7 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<ApiResponse> createCategory(@RequestBody @Valid CreateCategoryDto createCategoryDto) {
-        if (Objects.nonNull(categoryService.readCategory(createCategoryDto.getCategoryName()))) {
+        if (Objects.nonNull(categoryService.readCategory(createCategoryDto.categoryName()))) {
             return new ResponseEntity<>(
                     new ApiResponse(false, "Category already exists"),
                     HttpStatus.CONFLICT
