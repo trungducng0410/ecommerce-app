@@ -1,9 +1,9 @@
-package io.ducnt.ecommerce.service;
+package io.ducnt.ecommerce.services;
 
-import io.ducnt.ecommerce.dto.CreateCategoryDto;
-import io.ducnt.ecommerce.model.Category;
-import io.ducnt.ecommerce.repository.CategoryRepository;
-import io.ducnt.ecommerce.service.impl.CategoryServiceImpl;
+import io.ducnt.ecommerce.dtos.CreateCategoryDto;
+import io.ducnt.ecommerce.models.Category;
+import io.ducnt.ecommerce.repositories.CategoryRepository;
+import io.ducnt.ecommerce.services.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;

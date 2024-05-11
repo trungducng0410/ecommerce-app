@@ -1,4 +1,4 @@
-package io.ducnt.ecommerce.model;
+package io.ducnt.ecommerce.models;
 
 import jakarta.persistence.*;
 import lombok.Data;

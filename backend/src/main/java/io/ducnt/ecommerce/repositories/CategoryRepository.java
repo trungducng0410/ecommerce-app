@@ -1,6 +1,6 @@
-package io.ducnt.ecommerce.repository;
+package io.ducnt.ecommerce.repositories;
 
-import io.ducnt.ecommerce.model.Category;
+import io.ducnt.ecommerce.models.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

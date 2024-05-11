@@ -1,4 +1,4 @@
-package io.ducnt.ecommerce.dto;
+package io.ducnt.ecommerce.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
