@@ -5,5 +5,8 @@ import lombok.Builder;
 
 
 @Builder
-public record CreateCategoryDto(@NotBlank String categoryName, String description, String imageUrl) {
+public record CreateCategoryDto(
+        @NotBlank(message = "Invalid category name. Name should not be blank") String categoryName,
+        String description,
+        String imageUrl) {
 }
