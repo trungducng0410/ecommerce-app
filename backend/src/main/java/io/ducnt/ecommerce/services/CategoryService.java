@@ -2,9 +2,11 @@ package io.ducnt.ecommerce.services;
 
 import io.ducnt.ecommerce.dtos.CategoryDto;
 import io.ducnt.ecommerce.dtos.CreateCategoryDto;
-import io.ducnt.ecommerce.models.Category;
+
+import java.util.List;
 
 public interface CategoryService {
-    Category readCategory(String categoryName);
     CategoryDto createCategory(CreateCategoryDto createCategoryDto);
+    List<CategoryDto> listCategories();
+    CategoryDto updateCategory(int id, CreateCategoryDto updateCategoryDto);
 }

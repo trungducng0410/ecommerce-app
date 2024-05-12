@@ -43,6 +43,5 @@ class CategoryControllerTest {
         response.andExpect(status().isCreated())
                 .andExpect(jsonPath("categoryName", CoreMatchers.equalTo("Book")))
                 .andExpect(jsonPath("description", CoreMatchers.equalTo("Book")));
-
     }
 }
