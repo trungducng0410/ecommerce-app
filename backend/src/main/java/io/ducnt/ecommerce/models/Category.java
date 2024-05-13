@@ -1,5 +1,6 @@
 package io.ducnt.ecommerce.models;
 
+import io.ducnt.ecommerce.dtos.CreateCategoryDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,10 @@ public class Category {
     private String description;
 
     private String imageUrl;
+
+    public Category(CreateCategoryDto createCategoryDto) {
+        this.categoryName = createCategoryDto.categoryName();
+        this.description = createCategoryDto.description();
+        this.imageUrl = createCategoryDto.imageUrl();
+    }
 }

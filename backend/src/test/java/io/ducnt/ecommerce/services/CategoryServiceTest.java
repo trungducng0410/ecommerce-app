@@ -4,7 +4,6 @@ import io.ducnt.ecommerce.dtos.CategoryDto;
 import io.ducnt.ecommerce.dtos.CreateCategoryDto;
 import io.ducnt.ecommerce.models.Category;
 import io.ducnt.ecommerce.repositories.CategoryRepository;
-import io.ducnt.ecommerce.services.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -26,7 +25,7 @@ class CategoryServiceTest {
     private CategoryRepository categoryRepository;
 
     @InjectMocks
-    private CategoryServiceImpl service;
+    private CategoryService service;
 
     @Test
     void givenCategory_whenReadCategory_thenReturnCategory() {
