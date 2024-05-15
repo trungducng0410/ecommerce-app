@@ -60,4 +60,13 @@ public class CategoryService {
             throw new CategoryNotFoundException("No category is found with id: " + id);
         }
     }
+
+    public CategoryDto getCategory(int id) {
+        Optional<Category> categoryTmp = categoryRepository.findById(id);
+        if (categoryTmp.isEmpty()) {
+            throw new CategoryNotFoundException("No category is found with id: " + id);
+        }
+
+        return new CategoryDto(categoryTmp.get());
+    }
 }

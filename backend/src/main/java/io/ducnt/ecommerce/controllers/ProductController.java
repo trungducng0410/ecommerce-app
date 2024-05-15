@@ -4,6 +4,7 @@ import io.ducnt.ecommerce.dtos.CreateProductDto;
 import io.ducnt.ecommerce.dtos.ProductDto;
 import io.ducnt.ecommerce.services.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid CreateProductDto createProductDto) {
@@ -22,7 +28,10 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductDto> getProducts() {
+    public List<ProductDto> getProducts(@RequestParam int categoryId) {
+        if (categoryId != 0) {
+            return productService.listProducts(categoryId);
+        }
         return productService.listProducts();
     }
 
