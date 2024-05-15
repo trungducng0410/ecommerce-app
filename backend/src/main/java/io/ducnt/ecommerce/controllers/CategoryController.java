@@ -33,6 +33,11 @@ public class CategoryController {
         return categoryService.listCategories();
     }
 
+    @GetMapping("/{id}")
+    public CategoryDto getCategory(@PathVariable int id) {
+        return categoryService.getCategory(id);
+    }
+
     @PutMapping("/{id}")
     public CategoryDto updateCategory(@PathVariable int id, @RequestBody @Valid CreateCategoryDto updateCategoryDto) {
         return categoryService.updateCategory(id, updateCategoryDto);

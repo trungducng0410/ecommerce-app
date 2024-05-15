@@ -9,10 +9,12 @@ import io.ducnt.ecommerce.models.Product;
 import io.ducnt.ecommerce.repositories.CategoryRepository;
 import io.ducnt.ecommerce.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -41,6 +43,13 @@ public class ProductService {
 
     public List<ProductDto> listProducts() {
         return productRepository.findAll()
+                .stream()
+                .map(ProductDto::new)
+                .toList();
+    }
+
+    public List<ProductDto> listProducts(int categoryId) {
+        return productRepository.findAllByCategoryId(categoryId)
                 .stream()
                 .map(ProductDto::new)
                 .toList();
