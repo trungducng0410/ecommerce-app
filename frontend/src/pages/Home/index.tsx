@@ -9,7 +9,10 @@ export const Home = () => {
 
     return (
         <>
-            <img src="/public/banner.avif" height={300} width="100%" />
+            <img
+                src="/public/banner.jpeg"
+                style={{ width: "100%", maxHeight: 300 }}
+            />
             <Container maxWidth="xl" sx={{ mt: 2 }}>
                 <Typography variant="h5">Our categories</Typography>
                 <Stack

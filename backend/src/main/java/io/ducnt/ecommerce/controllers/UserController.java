@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -29,7 +29,7 @@ public class UserController {
         return userService.signUp(signupDto);
     }
 
-    @PostMapping("/signIn")
+    @PostMapping("/signin")
     public SignUpResponseDto signIn(@RequestBody @Valid SignInDto signInDto) throws AuthenticationFailException {
         return userService.signIn(signInDto);
     }
