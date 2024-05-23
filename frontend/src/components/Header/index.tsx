@@ -1,11 +1,13 @@
 import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/Auth/useAuth";
 
 const navItems = [{ label: "Pokédex", to: "/admin/categories" }];
 
 export const Header = () => {
     const navigate = useNavigate();
+    const { token, logout } = useAuth();
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -44,7 +46,20 @@ export const Header = () => {
                             </Button>
                         ))}
                     </Box>
-                    <Button color="inherit">Login</Button>
+                    {!token ? (
+                        <Button
+                            onClick={() => {
+                                navigate("/signin");
+                            }}
+                            color="inherit"
+                        >
+                            Login
+                        </Button>
+                    ) : (
+                        <Button onClick={logout} color="inherit">
+                            Logout
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
         </Box>
