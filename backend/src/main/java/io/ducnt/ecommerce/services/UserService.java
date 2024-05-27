@@ -2,6 +2,7 @@ package io.ducnt.ecommerce.services;
 
 import io.ducnt.ecommerce.configs.MessageStrings;
 import io.ducnt.ecommerce.dtos.SignInDto;
+import io.ducnt.ecommerce.dtos.SignInResponseDto;
 import io.ducnt.ecommerce.dtos.SignUpResponseDto;
 import io.ducnt.ecommerce.dtos.SignupDto;
 import io.ducnt.ecommerce.exceptions.AuthenticationFailException;
@@ -65,7 +66,7 @@ public class UserService {
         return DatatypeConverter.printHexBinary(digest).toUpperCase();
     }
 
-    public SignUpResponseDto signIn(SignInDto signInDto) throws AuthenticationFailException {
+    public SignInResponseDto signIn(SignInDto signInDto) throws AuthenticationFailException {
         Optional<User> userOptional = userRepository.findByEmail(signInDto.email());
         if (userOptional.isEmpty()) {
             throw new AuthenticationFailException("user not present");
@@ -92,6 +93,6 @@ public class UserService {
             throw new AuthenticationFailException(MessageStrings.AUTH_TOKEN_NOT_PRESENT);
         }
 
-        return new SignUpResponseDto("success", token.get().getToken());
+        return new SignInResponseDto("success", token.get().getToken());
     }
 }
