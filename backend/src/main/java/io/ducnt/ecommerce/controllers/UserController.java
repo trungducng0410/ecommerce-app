@@ -1,6 +1,7 @@
 package io.ducnt.ecommerce.controllers;
 
 import io.ducnt.ecommerce.dtos.SignInDto;
+import io.ducnt.ecommerce.dtos.SignInResponseDto;
 import io.ducnt.ecommerce.dtos.SignUpResponseDto;
 import io.ducnt.ecommerce.dtos.SignupDto;
 import io.ducnt.ecommerce.exceptions.AuthenticationFailException;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public SignUpResponseDto signIn(@RequestBody @Valid SignInDto signInDto) throws AuthenticationFailException {
+    public SignInResponseDto signIn(@RequestBody @Valid SignInDto signInDto) throws AuthenticationFailException {
         return userService.signIn(signInDto);
     }
 }
