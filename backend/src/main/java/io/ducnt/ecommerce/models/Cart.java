@@ -8,12 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "wishlists")
+@Table(name = "carts")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class WishList {
-
+@NoArgsConstructor
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,18 +20,20 @@ public class WishList {
     @Column(name = "created_at")
     private Date createdAt;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    private int quantity;
 
-    @ManyToOne()
-    @JoinColumn(name = "product_id")
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    public WishList(User user, Product product) {
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Cart(User user, Product product, int quantity) {
         this.user = user;
         this.product = product;
+        this.quantity = quantity;
         this.createdAt = new Date();
     }
-
 }

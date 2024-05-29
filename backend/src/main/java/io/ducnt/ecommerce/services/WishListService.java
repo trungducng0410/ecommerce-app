@@ -6,7 +6,6 @@ import io.ducnt.ecommerce.exceptions.*;
 import io.ducnt.ecommerce.models.Product;
 import io.ducnt.ecommerce.models.User;
 import io.ducnt.ecommerce.models.WishList;
-import io.ducnt.ecommerce.repositories.ProductRepository;
 import io.ducnt.ecommerce.repositories.WishListRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,17 +19,17 @@ import java.util.Optional;
 public class WishListService {
     private final Logger logger = LoggerFactory.getLogger(WishListService.class);
     private final WishListRepository wishListRepository;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
     private final AuthenticationService authenticationService;
 
     @Autowired
-    public WishListService(WishListRepository wishListRepository, ProductRepository productRepository, AuthenticationService authenticationService) {
+    public WishListService(WishListRepository wishListRepository, ProductService productService, AuthenticationService authenticationService) {
         this.wishListRepository = wishListRepository;
-        this.productRepository = productRepository;
+        this.productService = productService;
         this.authenticationService = authenticationService;
     }
 
-    public void createWishList(CreateWishListDto createWishListDto, String authToken) throws AuthenticationFailException {
+    public void createWishList(CreateWishListDto createWishListDto, String authToken) throws AuthenticationFailException, DuplicateWishListException, ProductNotFoundException {
         // Check user token
         authenticationService.authenticate(authToken);
 
@@ -38,16 +37,9 @@ public class WishListService {
         User user = authenticationService.getUser(authToken);
 
         // Get product
-        Integer productId = createWishListDto.productId();
-        Optional<Product> optionalProduct = productRepository.findById(productId);
-
-        if (optionalProduct.isEmpty()) {
-            this.logger.error("Product is not found with id {}", productId);
-            throw new ProductNotFoundException("Product is not found with id: " + productId);
-        }
+        Product product = productService.getProductById(createWishListDto.productId());
 
         // Check duplicate wishlist
-        Product product = optionalProduct.get();
         Optional<WishList> existingWishList = wishListRepository.findByUserAndProduct(user, product);
         if (existingWishList.isPresent()) {
             this.logger.error("Wishlist is already existed for user {} with product {}", user, product);
@@ -55,7 +47,7 @@ public class WishListService {
         }
 
         // Save wishlist
-        WishList wishList = new WishList(user, optionalProduct.get());
+        WishList wishList = new WishList(user, product);
         wishListRepository.save(wishList);
     }
 
@@ -73,7 +65,7 @@ public class WishListService {
                 .toList();
     }
 
-    public void deleteWishList(Integer wishListId, String authToken) throws AuthenticationFailException {
+    public void deleteWishList(Integer wishListId, String authToken) throws AuthenticationFailException, UnauthorizedException, WishListNotFoundException {
         // Check user token
         authenticationService.authenticate(authToken);
 
