@@ -26,7 +26,7 @@ public class CategoryService {
         return categoryRepository.findByCategoryName(categoryName);
     }
 
-    public CategoryDto createCategory(CreateCategoryDto createCategoryDto) {
+    public CategoryDto createCategory(CreateCategoryDto createCategoryDto) throws DuplicateCategoryException {
         Category existingCategory = categoryRepository.findByCategoryName(createCategoryDto.categoryName());
         if (existingCategory != null) {
             throw new DuplicateCategoryException("Category is existed");
@@ -44,7 +44,7 @@ public class CategoryService {
         return categories.stream().map(CategoryDto::new).toList();
     }
 
-    public CategoryDto updateCategory(int id, CreateCategoryDto updateCategoryDto) {
+    public CategoryDto updateCategory(int id, CreateCategoryDto updateCategoryDto) throws CategoryNotFoundException {
         Optional<Category> categoryTmp = categoryRepository.findById(id);
         if (categoryTmp.isPresent()) {
             Category category = categoryTmp.get();
@@ -61,7 +61,7 @@ public class CategoryService {
         }
     }
 
-    public CategoryDto getCategory(int id) {
+    public CategoryDto getCategory(int id) throws CategoryNotFoundException {
         Optional<Category> categoryTmp = categoryRepository.findById(id);
         if (categoryTmp.isEmpty()) {
             throw new CategoryNotFoundException("No category is found with id: " + id);

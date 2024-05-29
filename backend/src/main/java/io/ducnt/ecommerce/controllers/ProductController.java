@@ -2,6 +2,8 @@ package io.ducnt.ecommerce.controllers;
 
 import io.ducnt.ecommerce.dtos.CreateProductDto;
 import io.ducnt.ecommerce.dtos.ProductDto;
+import io.ducnt.ecommerce.exceptions.CategoryNotFoundException;
+import io.ducnt.ecommerce.exceptions.ProductNotFoundException;
 import io.ducnt.ecommerce.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid CreateProductDto createProductDto) {
+    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid CreateProductDto createProductDto) throws CategoryNotFoundException {
         ProductDto createdProduct = productService.createProduct(createProductDto);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
@@ -36,12 +38,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDto getProduct(@PathVariable int id) {
-        return productService.getProductById(id);
+    public ProductDto getProduct(@PathVariable int id) throws ProductNotFoundException {
+        return productService.getProduct(id);
     }
 
     @PutMapping("/{id}")
-    public ProductDto updateProduct(@PathVariable int id, @RequestBody @Valid CreateProductDto updateProductDto) {
+    public ProductDto updateProduct(@PathVariable int id, @RequestBody @Valid CreateProductDto updateProductDto) throws CategoryNotFoundException, ProductNotFoundException {
         return productService.updateProduct(id, updateProductDto);
     }
 }

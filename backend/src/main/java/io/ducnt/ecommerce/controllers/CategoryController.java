@@ -2,6 +2,8 @@ package io.ducnt.ecommerce.controllers;
 
 import io.ducnt.ecommerce.dtos.CategoryDto;
 import io.ducnt.ecommerce.dtos.CreateCategoryDto;
+import io.ducnt.ecommerce.exceptions.CategoryNotFoundException;
+import io.ducnt.ecommerce.exceptions.DuplicateCategoryException;
 import io.ducnt.ecommerce.services.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CreateCategoryDto createCategoryDto) {
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody @Valid CreateCategoryDto createCategoryDto) throws DuplicateCategoryException {
         CategoryDto categoryDto = categoryService.createCategory(createCategoryDto);
         return new ResponseEntity<>(categoryDto, HttpStatus.CREATED);
     }
@@ -34,12 +36,12 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public CategoryDto getCategory(@PathVariable int id) {
+    public CategoryDto getCategory(@PathVariable int id) throws CategoryNotFoundException {
         return categoryService.getCategory(id);
     }
 
     @PutMapping("/{id}")
-    public CategoryDto updateCategory(@PathVariable int id, @RequestBody @Valid CreateCategoryDto updateCategoryDto) {
+    public CategoryDto updateCategory(@PathVariable int id, @RequestBody @Valid CreateCategoryDto updateCategoryDto) throws CategoryNotFoundException {
         return categoryService.updateCategory(id, updateCategoryDto);
     }
 }
