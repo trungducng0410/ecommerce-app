@@ -2,6 +2,8 @@ package io.ducnt.ecommerce.services;
 
 import io.ducnt.ecommerce.dtos.CreateProductDto;
 import io.ducnt.ecommerce.dtos.ProductDto;
+import io.ducnt.ecommerce.exceptions.CategoryNotFoundException;
+import io.ducnt.ecommerce.exceptions.ProductNotFoundException;
 import io.ducnt.ecommerce.models.Category;
 import io.ducnt.ecommerce.models.Product;
 import io.ducnt.ecommerce.repositories.CategoryRepository;
@@ -31,7 +33,7 @@ class ProductServiceTest {
     private ProductService service;
 
     @Test
-    void givenValidCreateProductInput_whenCreateProduct_thenReturnNewProduct() {
+    void givenValidCreateProductInput_whenCreateProduct_thenReturnNewProduct() throws CategoryNotFoundException {
         CreateProductDto createProductDto = new CreateProductDto("Macbook Air", "https://www.test.com/", 1000.0, "Apple Macbook Air 2024", 1);
         Category category = new Category(1, "Laptop", "Personal Computer", "https://www.test.com/");
 
@@ -70,7 +72,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void givenProduct_whenGetProductById_thenReturnProductDto() {
+    void givenProduct_whenGetProductById_thenReturnProductDto() throws ProductNotFoundException {
         Product laptop = new Product();
         laptop.setId(1);
         laptop.setName("Macbook Air");
@@ -80,14 +82,14 @@ class ProductServiceTest {
 
         when(productRepository.findById(1)).thenReturn(Optional.of(laptop));
 
-        ProductDto productDto = service.getProductById(1);
+        ProductDto productDto = service.getProduct(1);
 
         assertNotNull(productDto);
         assertEquals(productDto.id(), laptop.getId());
     }
 
     @Test
-    void givenProduct_whenUpdateProduct_thenReturnUpdatedProduct() {
+    void givenProduct_whenUpdateProduct_thenReturnUpdatedProduct() throws CategoryNotFoundException, ProductNotFoundException {
         Category category = new Category(1, "Laptop", "Personal Computer", "https://www.test.com/");
         Product laptop = new Product(1, "Macbook Air", "https://www.test.com/", 1500.0, "Apple Macbook Air 2024", category);
         CreateProductDto updateProductDto = new CreateProductDto("Macbook Pro", "https://www.test.com/", 1000.0, "Apple Macbook Air 2024", 1);

@@ -2,6 +2,8 @@ package io.ducnt.ecommerce.services;
 
 import io.ducnt.ecommerce.dtos.CategoryDto;
 import io.ducnt.ecommerce.dtos.CreateCategoryDto;
+import io.ducnt.ecommerce.exceptions.CategoryNotFoundException;
+import io.ducnt.ecommerce.exceptions.DuplicateCategoryException;
 import io.ducnt.ecommerce.models.Category;
 import io.ducnt.ecommerce.repositories.CategoryRepository;
 import org.junit.jupiter.api.Test;
@@ -50,7 +52,7 @@ class CategoryServiceTest {
     }
 
     @Test
-    void givenValidCreateCategoryInput_whenCreateNewCategory_thenCallSaveRepoLayerOnce() {
+    void givenValidCreateCategoryInput_whenCreateNewCategory_thenCallSaveRepoLayerOnce() throws DuplicateCategoryException {
         CreateCategoryDto createBookDto = CreateCategoryDto.builder().categoryName("Book").description("Book").build();
 
         Category book = new Category();
@@ -77,7 +79,7 @@ class CategoryServiceTest {
     }
 
     @Test
-    void givenCategory_whenUpdateCategory_thenReturnUpdatedCategory() {
+    void givenCategory_whenUpdateCategory_thenReturnUpdatedCategory() throws CategoryNotFoundException {
         Category category = new Category(1, "Book", "Book", "book url");
         Category updatedCategory = new Category(1, "Watch", "Watch", "watch url");
         CreateCategoryDto updateCategoryDto = new CreateCategoryDto("Watch", "Watch", "watch url");

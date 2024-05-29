@@ -27,7 +27,7 @@ public class ProductService {
     }
 
 
-    public ProductDto createProduct(CreateProductDto createProductDto) {
+    public ProductDto createProduct(CreateProductDto createProductDto) throws CategoryNotFoundException {
         Integer categoryId = createProductDto.categoryId();
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
         if (optionalCategory.isEmpty()) {
@@ -55,7 +55,7 @@ public class ProductService {
                 .toList();
     }
 
-    public ProductDto getProductById(int id) {
+    public ProductDto getProduct(int id) throws ProductNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isEmpty()) {
             throw new ProductNotFoundException("Product is not found with id: " + id);
@@ -64,7 +64,14 @@ public class ProductService {
         return new ProductDto(optionalProduct.get());
     }
 
-    public ProductDto updateProduct(int id, CreateProductDto updateProductDto) {
+    public Product getProductById(Integer productId) throws ProductNotFoundException {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isEmpty())
+            throw new ProductNotFoundException("Product is not found with id: " + productId);
+        return optionalProduct.get();
+    }
+
+    public ProductDto updateProduct(int id, CreateProductDto updateProductDto) throws CategoryNotFoundException, ProductNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isEmpty()) {
             throw new ProductNotFoundException("Product is not found with id: " + id);
