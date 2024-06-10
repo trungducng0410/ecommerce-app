@@ -2,8 +2,13 @@ import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth/useAuth";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-const navItems = [{ label: "Pokédex", to: "/admin/categories" }];
+const navItems = [
+    { label: "Pokédex", to: "/admin/categories" },
+    { label: "WishList", to: "/wishlist" },
+    { label: <ShoppingCartIcon />, to: "/cart" },
+];
 
 export const Header = () => {
     const navigate = useNavigate();

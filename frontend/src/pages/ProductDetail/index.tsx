@@ -15,8 +15,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 export const ProductDetail = () => {
-    const { product, category, quantity, onQuantityChange } =
-        useProductDetail();
+    const {
+        product,
+        category,
+        quantity,
+        onQuantityChange,
+        addToWishList,
+        addToCart,
+    } = useProductDetail();
 
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
@@ -70,6 +76,7 @@ export const ProductDetail = () => {
                             color="primary"
                             aria-label="add to shopping cart"
                             size="large"
+                            onClick={addToCart}
                         >
                             <AddShoppingCartIcon />
                         </IconButton>
@@ -78,6 +85,7 @@ export const ProductDetail = () => {
                     <Button
                         startIcon={<FavoriteBorderIcon />}
                         variant="contained"
+                        onClick={addToWishList}
                     >
                         Add to wish list
                     </Button>
