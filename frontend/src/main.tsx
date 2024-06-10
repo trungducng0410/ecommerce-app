@@ -19,6 +19,8 @@ import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 import { AuthProvider } from "./contexts/Auth/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { WishList } from "./pages/WishList";
+import { Cart } from "./pages/Cart";
 
 const darkTheme = createTheme({
     palette: {
@@ -49,6 +51,22 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                         <Route
                             path="/categories/:categoryId/products/:productId"
                             element={<ProductDetail />}
+                        />
+                        <Route
+                            path="/wishlist"
+                            element={
+                                <ProtectedRoute>
+                                    <WishList />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/cart"
+                            element={
+                                <ProtectedRoute>
+                                    <Cart />
+                                </ProtectedRoute>
+                            }
                         />
                         <Route
                             path="/admin/categories/add"

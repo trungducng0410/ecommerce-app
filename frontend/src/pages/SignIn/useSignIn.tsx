@@ -18,7 +18,7 @@ export const useSignIn = () => {
 
         try {
             const response = await axios.post(`${API_ENDPOINT}/signin`, input);
-            login(response.data.message);
+            login(response.data.token);
             Swal.fire({
                 icon: "success",
                 title: "Success",
