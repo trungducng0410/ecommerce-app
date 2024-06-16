@@ -4,12 +4,17 @@ interface IAuthContext {
     token: string | null;
     login: (token: string) => void;
     logout: () => void;
+    sessionId: string | null;
+    setSession: (sessionId: string) => void;
 }
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [sessionId, setSessionId] = useState(
+        localStorage.getItem("sessionId")
+    );
 
     const login = (token: string) => {
         localStorage.setItem("token", token);
@@ -21,8 +26,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setToken(null);
     };
 
+    const setSession = (sessionId: string) => {
+        localStorage.setItem("sessionId", sessionId);
+        setSessionId(sessionId);
+    };
+
     return (
-        <AuthContext.Provider value={{ token, login, logout }}>
+        <AuthContext.Provider
+            value={{
+                token,
+                login,
+                logout,
+                sessionId,
+                setSession,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );

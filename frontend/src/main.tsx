@@ -21,6 +21,8 @@ import { AuthProvider } from "./contexts/Auth/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { WishList } from "./pages/WishList";
 import { Cart } from "./pages/Cart";
+import { PaymentSuccess } from "./pages/PaymentSuccess";
+import { PaymentFailed } from "./pages/PaymentFailed";
 
 const darkTheme = createTheme({
     palette: {
@@ -115,6 +117,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                                     <EditProduct />
                                 </ProtectedRoute>
                             }
+                        />
+                        <Route
+                            path="/payment/success"
+                            element={<PaymentSuccess />}
+                        />
+                        <Route
+                            path="/payment/failed"
+                            element={<PaymentFailed />}
                         />
                     </Routes>
                 </BrowserRouter>

@@ -12,7 +12,7 @@ export interface CartItem {
 }
 
 export const useCart = () => {
-    const { token } = useAuth();
+    const { token, setSession } = useAuth();
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [total, setTotal] = useState(0);
 
@@ -56,5 +56,37 @@ export const useCart = () => {
         }
     };
 
-    return { cartItems, total, itemsCount: cartItems.length, deleteItem };
+    const confirmOrder = async () => {
+        const orderInput = cartItems.map((item) => ({
+            productId: item.product.id,
+            quantity: item.quantity,
+            price: item.product.price,
+            productName: item.product.name,
+        }));
+
+        try {
+            const response = await axios.post(
+                `${API_ENDPOINT}/orders/create-checkout-session`,
+                orderInput
+            );
+
+            setSession(response.data.sessionId);
+            window.location.href = response.data.url;
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "An error occurred while confirming the order",
+            });
+        }
+    };
+
+    return {
+        cartItems,
+        total,
+        itemsCount: cartItems.length,
+        deleteItem,
+        confirmOrder,
+    };
 };
