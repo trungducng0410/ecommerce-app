@@ -10,9 +10,14 @@ import {
 interface OrderSummaryProps {
     total: number;
     itemsCount: number;
+    confirmOrder: () => void;
 }
 
-export const OrderSummary = ({ total, itemsCount }: OrderSummaryProps) => {
+export const OrderSummary = ({
+    total,
+    itemsCount,
+    confirmOrder,
+}: OrderSummaryProps) => {
     return (
         <Card style={{ marginTop: 10 }} elevation={15}>
             <CardContent>
@@ -37,7 +42,9 @@ export const OrderSummary = ({ total, itemsCount }: OrderSummaryProps) => {
             </CardContent>
 
             <CardActions>
-                <Button size="large">Confirm Order ({itemsCount})</Button>
+                <Button onClick={confirmOrder} size="large">
+                    Confirm Order ({itemsCount})
+                </Button>
             </CardActions>
         </Card>
     );

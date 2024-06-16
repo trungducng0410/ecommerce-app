@@ -4,7 +4,8 @@ import { OrderSummary } from "../../components/OrderSummary";
 import { useCart } from "./useCart";
 
 export const Cart = () => {
-    const { total, itemsCount, cartItems, deleteItem } = useCart();
+    const { total, itemsCount, cartItems, deleteItem, confirmOrder } =
+        useCart();
 
     return (
         <Container sx={{ mt: 3 }}>
@@ -24,7 +25,11 @@ export const Cart = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sm={6} md={5} lg={5}>
-                    <OrderSummary total={total} itemsCount={itemsCount} />
+                    <OrderSummary
+                        confirmOrder={confirmOrder}
+                        total={total}
+                        itemsCount={itemsCount}
+                    />
                 </Grid>
             </Grid>
         </Container>
