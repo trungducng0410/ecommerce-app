@@ -1,7 +1,7 @@
 package io.ducnt.ecommerce.dtos;
 
 
-import io.ducnt.ecommerce.models.Product;
+import io.ducnt.ecommerce.entities.Product;
 
 public record CartItemDto(
         Integer id,

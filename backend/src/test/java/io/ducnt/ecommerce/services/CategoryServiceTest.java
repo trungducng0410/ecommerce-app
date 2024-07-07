@@ -4,7 +4,7 @@ import io.ducnt.ecommerce.dtos.CategoryDto;
 import io.ducnt.ecommerce.dtos.CreateCategoryDto;
 import io.ducnt.ecommerce.exceptions.CategoryNotFoundException;
 import io.ducnt.ecommerce.exceptions.DuplicateCategoryException;
-import io.ducnt.ecommerce.models.Category;
+import io.ducnt.ecommerce.entities.Category;
 import io.ducnt.ecommerce.repositories.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

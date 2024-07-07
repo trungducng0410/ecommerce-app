@@ -23,6 +23,7 @@ import { WishList } from "./pages/WishList";
 import { Cart } from "./pages/Cart";
 import { PaymentSuccess } from "./pages/PaymentSuccess";
 import { PaymentFailed } from "./pages/PaymentFailed";
+import { OrderHistory } from "./pages/OrderHistory";
 
 const darkTheme = createTheme({
     palette: {
@@ -31,104 +32,100 @@ const darkTheme = createTheme({
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-        <ThemeProvider theme={darkTheme}>
-            <AuthProvider>
-                <BrowserRouter>
-                    <CssBaseline />
-                    <Header />
+    <ThemeProvider theme={darkTheme}>
+        <AuthProvider>
+            <BrowserRouter>
+                <CssBaseline />
+                <Header />
 
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={<Home />}
-                            errorElement={<ErrorPage />}
-                        />
-                        <Route path="/signup" element={<SignUp />} />
-                        <Route path="/signin" element={<SignIn />} />
-                        <Route
-                            path="/categories/:categoryId/products"
-                            element={<ProductList />}
-                        />
-                        <Route
-                            path="/categories/:categoryId/products/:productId"
-                            element={<ProductDetail />}
-                        />
-                        <Route
-                            path="/wishlist"
-                            element={
-                                <ProtectedRoute>
-                                    <WishList />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/cart"
-                            element={
-                                <ProtectedRoute>
-                                    <Cart />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/admin/categories/add"
-                            element={
-                                <ProtectedRoute>
-                                    <AddCategory />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/admin/categories"
-                            element={
-                                <ProtectedRoute>
-                                    <CategoriesManagement />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/admin/categories/:categoryId"
-                            element={
-                                <ProtectedRoute>
-                                    <EditCategory />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/admin/categories/:categoryId/products"
-                            element={
-                                <ProtectedRoute>
-                                    <ProductsManagement />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/admin/categories/:categoryId/products/add"
-                            element={
-                                <ProtectedRoute>
-                                    <AddProduct />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/admin/categories/:categoryId/products/:productId"
-                            element={
-                                <ProtectedRoute>
-                                    <EditProduct />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/payment/success"
-                            element={<PaymentSuccess />}
-                        />
-                        <Route
-                            path="/payment/failed"
-                            element={<PaymentFailed />}
-                        />
-                    </Routes>
-                </BrowserRouter>
-            </AuthProvider>
-        </ThemeProvider>
-    </React.StrictMode>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={<Home />}
+                        errorElement={<ErrorPage />}
+                    />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route
+                        path="/categories/:categoryId/products"
+                        element={<ProductList />}
+                    />
+                    <Route
+                        path="/categories/:categoryId/products/:productId"
+                        element={<ProductDetail />}
+                    />
+                    <Route
+                        path="/wishlist"
+                        element={
+                            <ProtectedRoute>
+                                <WishList />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/cart"
+                        element={
+                            <ProtectedRoute>
+                                <Cart />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/categories/add"
+                        element={
+                            <ProtectedRoute>
+                                <AddCategory />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/categories"
+                        element={
+                            <ProtectedRoute>
+                                <CategoriesManagement />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/categories/:categoryId"
+                        element={
+                            <ProtectedRoute>
+                                <EditCategory />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/categories/:categoryId/products"
+                        element={
+                            <ProtectedRoute>
+                                <ProductsManagement />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/categories/:categoryId/products/add"
+                        element={
+                            <ProtectedRoute>
+                                <AddProduct />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/categories/:categoryId/products/:productId"
+                        element={
+                            <ProtectedRoute>
+                                <EditProduct />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/payment/success"
+                        element={<PaymentSuccess />}
+                    />
+                    <Route path="/payment/failed" element={<PaymentFailed />} />
+                    <Route path="/orders" element={<OrderHistory />} />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+    </ThemeProvider>
 );

@@ -1,4 +1,4 @@
-package io.ducnt.ecommerce.models;
+package io.ducnt.ecommerce.entities;
 
 import io.ducnt.ecommerce.dtos.CreateCategoryDto;
 import jakarta.persistence.*;

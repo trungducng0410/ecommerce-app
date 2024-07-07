@@ -6,6 +6,7 @@ interface IAuthContext {
     logout: () => void;
     sessionId: string | null;
     setSession: (sessionId: string) => void;
+    clearSession: () => void;
 }
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
@@ -31,6 +32,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setSessionId(sessionId);
     };
 
+    const clearSession = () => {
+        localStorage.removeItem("sessionId");
+        setSessionId(null);
+    };
+
     return (
         <AuthContext.Provider
             value={{
@@ -39,6 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 logout,
                 sessionId,
                 setSession,
+                clearSession,
             }}
         >
             {children}

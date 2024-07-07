@@ -1,6 +1,6 @@
 package io.ducnt.ecommerce.repositories;
 
-import io.ducnt.ecommerce.models.Category;
+import io.ducnt.ecommerce.entities.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

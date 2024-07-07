@@ -2,8 +2,8 @@ package io.ducnt.ecommerce.services;
 
 import io.ducnt.ecommerce.configs.MessageStrings;
 import io.ducnt.ecommerce.exceptions.AuthenticationFailException;
-import io.ducnt.ecommerce.models.AuthenticationToken;
-import io.ducnt.ecommerce.models.User;
+import io.ducnt.ecommerce.entities.AuthenticationToken;
+import io.ducnt.ecommerce.entities.User;
 import io.ducnt.ecommerce.repositories.AuthenticationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

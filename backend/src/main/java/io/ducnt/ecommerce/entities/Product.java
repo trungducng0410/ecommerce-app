@@ -1,5 +1,6 @@
-package io.ducnt.ecommerce.models;
+package io.ducnt.ecommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.ducnt.ecommerce.dtos.CreateProductDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonIgnore
     private Category category;
 
     public Product(CreateProductDto createProductDto, Category category) {

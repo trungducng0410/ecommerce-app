@@ -7,6 +7,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const navItems = [
     { label: "Pokédex", to: "/admin/categories" },
     { label: "WishList", to: "/wishlist" },
+    { label: "Orders", to: "/orders" },
     { label: <ShoppingCartIcon />, to: "/cart" },
 ];
 

@@ -1,6 +1,6 @@
 package io.ducnt.ecommerce.repositories;
 
-import io.ducnt.ecommerce.models.Product;
+import io.ducnt.ecommerce.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

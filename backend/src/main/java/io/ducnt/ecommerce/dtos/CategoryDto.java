@@ -1,6 +1,6 @@
 package io.ducnt.ecommerce.dtos;
 
-import io.ducnt.ecommerce.models.Category;
+import io.ducnt.ecommerce.entities.Category;
 import lombok.Builder;
 
 @Builder
