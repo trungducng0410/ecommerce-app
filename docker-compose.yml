@@ -1,21 +1,43 @@
 services:
-  db:
-    container_name: mysql
-    image: mysql:latest
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ecommerce
-    networks:
-      - db
-    volumes:
-      - db:/var/lib/mysql
+    db:
+        container_name: mysql
+        image: mysql:latest
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ecommerce
+        networks:
+            - db
+        volumes:
+            - db:/var/lib/mysql
+    spring-api:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        networks:
+            - db
+        depends_on:
+            - db
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ecommerce
+            SPRING_DATASOURCE_USERNAME: root
+            SPRING_DATASOURCE_PASSWORD: root
+            STRIPE_SECRET_KEY: sk_test_51PSG1vGM5PzFBKn3QQjt9vpDzXgXItVyWWkuJ9HAFgHtIozTK4VBnvvZ7f8qVMoncWDxvVWbMkAPlQAqT8btj1mG00bDKcPA4q
+    react-app:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - "8081:8081"
+        depends_on:
+            - spring-api
 
 networks:
-  db:
-    driver: bridge
+    db:
+        driver: bridge
 
 volumes:
-  db:
-  
+    db:
